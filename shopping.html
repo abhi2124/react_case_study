@@ -1,0 +1,172 @@
+<!--<!DOCTYPE html>-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Custom React Component</title>
+    <script src="lib/react.js"></script>
+    <script src="lib/react-dom.js"></script>
+    <script type="text/javascript" src="lib/babel.min.js"></script>
+<link rel="stylesheet" href="style.css">
+    <script type="text/babel">
+
+        class App extends React.Component{ 
+            render(){ 
+                return(
+                    <div>
+                        <Header/>
+                        <Main/>
+						<Footer/>
+                    </div>
+                ) 
+            } 
+        }
+
+        class Header extends React.Component{
+            render(){ 
+                return(
+                    <div className="header">
+                        <h1>Shop Online</h1>
+						
+                    </div>
+                ) 
+            }
+        } 
+ 
+		class Footer extends React.Component{
+		render(){
+		return(
+			<div className="footer">
+				<p>Copyright@yashtechnology</p>
+			</div>
+		);
+		}
+		}
+
+        class Main extends React.Component{
+
+            constructor(){
+                super();
+                this.state={
+                    displayElement:<LoginForm login={this.login.bind(this)}/>
+                }
+            }
+			
+			setUserName(event) {
+				this.setState({
+					username: event.target.value
+				});
+			}
+
+            login(event){
+ 
+               this.setState({ displayElement : <Product/>})
+            }
+
+            render(){ 
+                return(
+                   <div className="main">
+                        {this.state.displayElement}
+                   </div>
+                ) 
+            }
+        }
+
+        const LoginForm=(props)=>(																							
+                    <div className="loginForm">
+                        <form onSubmit={props.login}>
+							<h1>Login</h1>
+                            Username:&nbsp;<input type="text" /><br /><br />
+                            Password:&nbsp;&nbsp;<input type="password"  /><br /><br />
+                            <input style={{float:"right"}} type="submit" value="Login" />
+                        </form>
+                   </div>
+        )
+
+        function onload() { 
+            ReactDOM.render(<App/>, document.getElementById('main')); 
+ 
+        }
+
+		class Product extends React.Component{ 
+		 
+		constructor(){
+		super();
+		this.state = {
+		products : [
+		{id: 1, name: 'Mobile', price: '10000', brand: 'Sony'},
+		{id: 2, name: 'Mobile', price: '30000', brand: 'Lenovo'},
+		{id: 3, name: 'Mobile', price: '25000', brand: 'VIVO'},
+		{id: 4, name: 'Mobile', price: '5000', brand: 'OPPO'}
+		],
+		productsInCart:[]
+
+		};
+		}
+
+		render(){
+			return(
+				<div style={{display:"flex"}}>
+					<div className="productList">
+					<h1>Product List</h1>
+					{this.state.products.map((product)=>{
+					return(
+					<div className="product">
+					<h2>{product.id.toString()}</h2>
+					<b className="b">{product.name}</b>
+					<b className="b">{product.price}</b>
+					<b className="b">{product.brand}</b>
+					<button onClick={(id)=>this.getProductById(product.id)}>Add</button>
+					</div>
+					)
+					})}
+					</div>
+					
+					<div className="cartList">
+					<h1>Product In Cart</h1>
+					{this.state.productsInCart.map((product)=>{
+					return(
+					<div className="product">
+					<h2>{product.id.toString()}</h2>
+					<b className="b">{product.name}</b>
+					<b className="b">{product.price}</b>
+					<b className="b">{product.brand}</b>
+					<button>Buy</button>
+					</div>
+					)
+					})}
+					</div>
+				</div>
+			);
+
+			
+		}
+			getProductById(id){
+			console.log(id);
+					for (var i = 0; i < this.state.products.length; i++) {
+								if(this.state.products[i].id == id){
+									this.state.productsInCart.push(this.state.products[i]);
+									this.setState({
+										productsInCart: this.state.productsInCart
+									});
+								}
+								
+							}
+							
+						}
+				
+		}
+
+
+    </script>
+
+</head>
+
+<body onload="onload()">
+ 
+    <div id="main"></div>
+ 
+
+</body>
+
+</html>

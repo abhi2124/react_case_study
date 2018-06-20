@@ -1,0 +1,47 @@
+.header{
+	height:150px;
+	background:black;
+	color:white;
+	padding-left:10px;
+	text-Align:center;
+}
+
+.footer{
+	height:50px;
+	background:black;
+	color:white;
+	text-Align:center;
+}
+
+.main{
+	margin:50px;
+}
+
+.loginForm{
+	border: 1px solid grey;
+    outline-style: solid;
+	margin:100px;
+	margin-left: 300px;
+	padding:10px;
+}
+
+.productList{
+	flex:1
+}
+
+.b{
+	
+	padding:5px;
+	padding-bottom:20px;
+}
+
+.product{
+	border: 1px solid grey;
+    outline-style: solid;
+    margin:5%;
+}
+
+.cartList{
+	
+	flex:1
+}
